@@ -3,9 +3,26 @@
 using namespace std;
 
 int main(){	
+
+	double l ;
+	double r ;
+	double p ;
+
 	cout << "Enter initial loan: ";
+	cin >> l ;
 	cout << "Enter interest rate per year (%): ";
+	cin >> r ;
 	cout << "Enter amount you can pay per year: ";
+	cin >> p ;
+
+	int N = 0 ;
+	double x = l;
+
+	while(x > 0){
+		x = x + (x*(r/100))-p ;
+		N++;
+	}
+
 
 	//use 'setw' to set width of table and 'left' to set left-alignment
 	//you can change input argument of 'setw()' to see the effect
@@ -17,17 +34,27 @@ int main(){
 	cout << setw(13) << left << "Payment";
 	cout << setw(13) << left << "NewBalance";
 	cout << "\n";
+
+	for(int i = 0; i < N; ++i ){
+	double IT =l*(r/100);
+	double TT = l+(IT);
+	if(TT < p ){
+		p = TT;
+	}
+	double NB = TT-p ;
 	
-	//use 'fixed' and 'setprecision' to fix the number of decimal digits for displaying
-	//you can change input argument of 'setprecision()' to see the effect
 	cout << fixed << setprecision(2); 
-	cout << setw(13) << left << 1; 
-	cout << setw(13) << left << 1000.0;
-	cout << setw(13) << left << 50.0;
-	cout << setw(13) << left << 1050.0;
-	cout << setw(13) << left << 100.0;
-	cout << setw(13) << left << 950.0;
+	cout << setw(13) << left << i+1; 
+	cout << setw(13) << left << l;
+	cout << setw(13) << left << IT;
+	cout << setw(13) << left << TT;
+	cout << setw(13) << left << p;
+	cout << setw(13) << left << NB;
 	cout << "\n";	
-	
+
+	l = NB;
+
+
+	}
 	return 0;
 }
